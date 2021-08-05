@@ -1,5 +1,6 @@
 #include "P1.h"
 #include <time.h>
+#include <string.h>
 
 //submenu 1
 int menuP1() {
@@ -9,7 +10,7 @@ int menuP1() {
         printf("Problema 1 - Listas:\n");
         printf("A - Concatenar L1 e L2\n");
         printf("B - Jogo\n");
-        printf("C - \n");
+        printf("C - Mercado\n");
         printf("X - Voltar\n");
         printf("Opcao: ");
         scanf(" %c", &option);
@@ -18,15 +19,15 @@ int menuP1() {
 
         switch (option) {
         case ('A'): case ('a'):
-            pA();
+            p1A();
             break;
 
         case ('B'): case ('b'):
-            pB();
+            p1B();
             break;
 
         case ('C'): case ('c'):
-            printf("Opcao C");
+            p1C();
             break;
 
         case ('X'): case ('x'):
@@ -49,73 +50,37 @@ int numGen(int interval) {
 }
 
 //inicializa lista apontado para null
-void init(Lista* l) {
-    l->first = (Block*)malloc(sizeof(Block));
+void initL(Lista* l) {
+    l->first = (BlockP1*)malloc(sizeof(BlockP1));
     l->last = l->first;
     l->first->next = NULL;
 }
 
 //inserir item especifico na lista
-void insert(Lista* l, Item d) {
-    l->last->next = (Block*)malloc(sizeof(Block));
+void insertL(Lista* l, ItemP1 d) {
+    l->last->next = (BlockP1*)malloc(sizeof(BlockP1));
     l->last = l->last->next;
     l->last->data = d;
     l->last->next = NULL;
 }
 
-//remover item especifico na lista
-void remove(Lista* l, Item d) {
-    Block* value, * temp;
+//esvaziar a lista inteira -> rever
+void emptyL(Lista* l) {
+    BlockP1 *value, *temp;
+    value = l->first->next;
 
-    if (l->last == l->first || l == NULL || l->last->next == NULL) {
-        printf("Lista vazia!\n");
-        return;
-    }
-
-    value = l->first;
-    while (value->next != NULL) {
-        if (value->next->data.val != d.val) {
-            value = value->next;
-        }
-        else {
-            temp = value;
-            value = value->next;
-            temp->next = value->next;
-            free(value);
-        }
-    }
-
-}
-
-//esvaziar a lista inteira
-void empty(Lista* l) {
-    Block* value, * temp;
-
-    if (l->last == l->first || l == NULL || l->last->next == NULL) {
-        printf("OK!\n");
-        return;
-    }
-
-    value = l->first;
-    while (value->next != NULL) {
+    while (temp != NULL) {
         temp = value;
-        value = value->next;
-        temp->next = value->next;
-        free(value);
+        value = temp->next;
+        free(temp);
     }
+    l->first->next = NULL;
+    l->last = NULL;
 }
 
-//troca entre 2 blocos
-void swap(Block* a, Block* b) {
-    Item aux;
-    aux = a->data;
-    a->data = b->data;
-    a->data = aux;
-}
-
-//imprimir lista
-void printAll(Lista* l) {
-    Block* temp;
+//imprimir numeros da lista
+void printValL(Lista* l) {
+    BlockP1* temp;
     temp = l->first->next;
 
     while (temp != NULL) {
@@ -123,139 +88,175 @@ void printAll(Lista* l) {
         temp = temp->next;
     }
     printf("\n");
+}
+
+//imprimir caracteres da lista
+void printStrL(Lista* l) {
+    BlockP1* temp;
+    temp = l->first->next;
+
+    while (temp != NULL) {
+        printf("%s ", temp->data.str);
+        temp = temp->next;
+    }
+    printf("\n");
 
 }
 
 //problema 1A (permutacao de 2 listas)
-void pA() {
+void p1A() {
     Lista L1, L2, L3;
-    Item d;
-    Block* aux1, * aux2;
+    ItemP1 d;
+    BlockP1* aux1, * aux2;
     int i = 0, k = 0, temp;
 
-    init(&L1);
-    init(&L2);
-    init(&L3);
+    initL(&L1);
+    initL(&L2);
+    initL(&L3);
 
     //preenchimento L1 e L2 -> par e impar respectivamente
-    while (i < PA || k < PA) {
+    while (i < P1A || k < P1A) {
         temp = numGen(200);
-        if (temp % 2 == 0 && i < PA) {
+        if (temp % 2 == 0 && i < P1A) {
             d.val = temp;
-            insert(&L1, d);
+            insertL(&L1, d);
             i++;
         }
-        else if (temp % 2 != 0 && k < PA) {
+        else if (temp % 2 != 0 && k < P1A) {
             d.val = temp;
-            insert(&L2, d);
+            insertL(&L2, d);
             k++;
         }
     }
-
-    i = 0;
-    k = 0;
 
     //preenchimento L3
     aux1 = L1.first->next;
     aux2 = L2.first->next;
-    while (i < PA) {
+    while (i > 0) {
         d = aux1->data;
-        insert(&L3, d);
+        insertL(&L3, d);
         d = aux2->data;
-        insert(&L3, d);
+        insertL(&L3, d);
         aux1 = aux1->next;
         aux2 = aux2->next;
-        i++;
+        i--;
     }
 
     printf("---------------\nLista 1\n");
-    printAll(&L1);
+    printValL(&L1);
     printf("---------------\nLista 2\n");
-    printAll(&L2);
+    printValL(&L2);
     printf("---------------\nLista 3\n");
-    printAll(&L3);
+    printValL(&L3);
 
-    printf("---------------\nEsvaziando listas...\n");
-    printf("Lista 1: ");
-    empty(&L1);
-    printf("Lista 2: ");
-    empty(&L2);
-    printf("Lista 3: ");
-    empty(&L3);
+    emptyL(&L1);
+    emptyL(&L2);
+    emptyL(&L3);
 }
 
-//problema 1B (jogo)
-void pB() {
+//problema 1B (jogo) -> rever comparacoes
+void p1B() {
     Lista L1, L2, L3;
-    Block* temp1, * temp2, * temp3;
-    Item d;
+    BlockP1* temp1, * temp2, * temp3;
+    ItemP1 d;
     int i = 0, k = 0;
 
-    init(&L1);
-    init(&L2);
-    init(&L3);
+    initL(&L1);
+    initL(&L2);
+    initL(&L3);
 
     //preenche L1 e L2
-    while (i < PB || k < PB) {
+    while (i < P1B || k < P1B) {
         d.val = numGen(13);
-        if (d.val != 0 && i < PB) {
-            insert(&L1, d);
+        if (d.val != 0 && i < P1B) {
+            insertL(&L1, d);
             i++;
         }
         d.val = numGen(13);
-        if (d.val != 0 && k < PB) {
-            insert(&L2, d);
+        if (d.val != 0 && k < P1B) {
+            insertL(&L2, d);
             k++;
         }
     }
-    //zerar contadores
-    i = 0;
-    k = 0;
 
     //numero inicial para o jogo
     int temp = numGen(13);
-    temp == 0 ? temp = 1 : NULL;
-    printf("...................\nNumero inicial: %d\n...................\n", temp);
+    temp == 0 ? temp = 1 : temp;
+    printf("...................\n"
+        "Numero inicial: %d\n"
+        "...................\n"
+        "Regra: (L1[i] - inicial + L2[i] - inicial = ?) => O maior ganha!\n\n", temp);
 
     //preenche lista auxilixar (L3) e imprime L1 e L2 em intervalos
     temp1 = L1.first->next;
     temp2 = L2.first->next;
     printf("Pares: {");
-    while (i < PB) {
+
+    while (i > 0) {
         printf("{%d , %d", temp1->data.val, temp2->data.val);
-        i != 2 ? printf("}, ") : printf("}");
+        i != P1B - 2 ? printf("}, ") : printf("}");
 
         d.val = temp1->data.val - temp + temp2->data.val - temp;
-        insert(&L3, d);
+        insertL(&L3, d);
 
         temp1 = temp1->next;
         temp2 = temp2->next;
+        i--;
+    }
+
+    printf("}\n\n");
+
+    temp1 = L3.first->next;
+    while (temp1 != NULL) {
+
+        printf("Soma %d: %d\n", i + 1, temp1->data.val);
 
         i++;
+        temp2 = temp1;
+        temp1 = temp2->next;
     }
-    printf("}\n");
-    printf("\nRegra: (L1[i] - inicial + L2[i] - inicial = ?)\n\nSoma (1, 2, 3): ");
-    printAll(&L3);
 
-    //comparacoes
+    //comparacoes => rever caso de empate
     temp1 = L3.first->next;
-    if(temp1->data.val > temp1->next->data.val && temp1->data.val > temp1->next->next->data.val) {
-        printf("\nSoma 1 (%d) vencedor!!!\n", temp1->data.val); 
-    } else if(temp1->next->data.val > temp1->data.val && temp1->next->data.val > temp1->next->next->data.val) {
-        printf("\nSoma 2 (%d) vencedor!!!\n", temp1->next->data.val);
-    } else printf("\nSoma 3 (%d) vencedor!!!\n", temp1->next->next->data.val);
+    printf("---------------------------------");
+    if (temp1->data.val > temp1->next->data.val && temp1->data.val > temp1->next->next->data.val)
+        printf("\n|Soma 1 (valor: %d) vencedor!!!|\n", temp1->data.val);
 
-    
-    printf("---------------\nEsvaziando listas...\n");
-    printf("Lista 1       : ");
-    empty(&L1);
-    printf("Lista 2       : ");
-    empty(&L2);
-    printf("Lista auxiliar: ");
-    empty(&L3);
-    printf("---------------\n");
+    else if (temp1->next->data.val > temp1->data.val && temp1->next->data.val > temp1->next->next->data.val)
+        printf("\n|Soma 2 (valor: %d) vencedor!!!|\n", temp1->next->data.val);
+
+    else printf("\n|Soma 3 (valor: %d) vencedor!!!|\n", temp1->next->next->data.val);
+    printf("---------------------------------\n");
+
+    emptyL(&L1);
+    emptyL(&L2);
+    emptyL(&L3);
 }
 
-void pC() {
-    
+//problema 1C (mercado) -> rever
+void p1C() {
+    Lista L1, L2, L3;
+    ItemP1 d;
+
+    //contadores
+    int i = 0, j = 0, k = 0;
+    char nome[25];
+
+    printf("nome: ");
+    fflush(stdin);
+    gets(nome);
+
+    initL(&L1);
+    initL(&L2);
+    initL(&L3);
+
+    d.str = nome;
+
+    insertL(&L1, d);
+    printStrL(&L1);
+
+    // emptyL(&L1);
+    // emptyL(&L2);
+    // emptyL(&L3);
+
 }

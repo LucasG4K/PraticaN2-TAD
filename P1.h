@@ -3,41 +3,40 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#define PA 100
-#define PB   3
-#define PC   6
+#define P1A 100
+#define P1B   3
+#define P1C   6
 
 typedef struct Lista Lista;
-typedef struct Block Block;
-typedef struct Item Item;
+typedef struct BlockP1 BlockP1;
+typedef struct ItemP1 ItemP1;
 
-struct Item {
+struct ItemP1 {
     int val;
-    char ch;//optando pela utilizacao desse modo pois o espaço alocado nao sera' tao grande por ser do tipo char
+    char *str;//optando pela utilizacao desse modo pois o espaço alocado nao sera' tao grande por ser do tipo char
 };
 
-struct Block {
-    Item data;
-    Block *next;
+struct BlockP1 {
+    ItemP1 data;
+    BlockP1 *next;
 };
 
 struct Lista {
-    Block *first;
-    Block *last;
+    BlockP1 *first;
+    BlockP1 *last;
 };
 
-void init(Lista *l);
-void insert(Lista *l, Item d);
-void remove(Lista *l, Item d);
-void swap(Block *a, Block *b);
-void empty(Lista *l);
-void printAll(Lista *l);
+void initL(Lista *l);
+void insertL(Lista *l, ItemP1 d);
+void emptyL(Lista *l);
+void printValL(Lista *l);
+void printStrL(Lista *l);
 
 int numGen(int interval);
 
 int menuP1();
-void pA();
-void pB();
-void pC();
+void p1A();
+void p1B();
+void p1C();
 
 #endif
