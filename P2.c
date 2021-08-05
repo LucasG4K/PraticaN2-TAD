@@ -1,4 +1,4 @@
-#include "P2.h"
+#include "P2&Pilha.h"
 
 //submenu 2
 int menuP2() {
@@ -25,7 +25,7 @@ int menuP2() {
             break;
 
         case ('C'): case ('c'):
-            //p2C();
+            p2C();
             break;
 
         case ('X'): case ('x'):
@@ -41,125 +41,74 @@ int menuP2() {
     } while (1);
 }
 
-//inicializa pilha apontado para null
-void initP(Pilha *p) {
-    p->base = (BlockP2 *)malloc(sizeof(BlockP2));
-    p->top = p->base;
-    p->base->next = NULL;
-}
-
-//inserir item especifico na pilha
-void push(Pilha *p, ItemP2 d) {
-    BlockP2 *temp = (BlockP2 *)malloc(sizeof(BlockP2));
-    temp->data = d;
-    temp->next = p->top;
-    p->top = temp;
-}
-
-//remover ItemP2 especifico da pilha
-void pop(Pilha *p, ItemP2 d) {
-    BlockP2 *temp;
-
-    if (p->base == p->top|| p == NULL) {
-        printf("Pilha vazia!\n");
-        return;
-    }
-
-    temp = p->top;
-    p->top = temp->next;
-    d.val = temp->data.val;
-    free(temp);
-}
-
-//esvaziar a pilha inteira -> rever
-void emptyP(Pilha *p) {
-    BlockP2 *temp, *aux;
-
-    temp = p->top;
-    while(temp->next != NULL) {
-        p->top = temp->next;
-        //d.val = temp->data.val;
-        free(temp);
-    }
-
-    if (p->base == p->top|| p == NULL) {
-        printf("Pilha vazia!\n");
-        return;
-    }
-}
-
-//imprimir numeros da pilha
-void printValP(Pilha *p) {
-    BlockP2 *temp;
-
-    temp = p->top;
-    while(temp != p->base) {
-        printf("%d\n", temp->data.val);
-        temp = temp->next;
-    }
-}
-
-//imprimir char da pilha
-void printTxtP(Pilha *p) {
-    BlockP2 *temp;
-
-    temp = p->top;
-    while(temp != p->base) {
-        printf("%s\n", temp->data.txt);
-        temp = temp->next;
-    }
-}
-
-//retorna numeros randomizados no intervalo desejado
-// int numGen(int interval) {
-//     return rand() % interval;
-// }
-
 void p2A() {
     Pilha p;
     ItemP2 d;
     int control = 0;
     BlockP2 *temp;
 
-    char teste[50];
+    char *teste = malloc(sizeof(char) * 50);
 
-    printf("Coloque os parenteses que deseja verificar: ");
+    printf("Insira a frase para verificar a parentizacao: ");
     fflush(stdin);
     gets(teste);
     printf("--------------------\n");
 
-    
     initP(&p);
     for (int i = 0; i < strlen(teste); i++) {
-        if(teste[i] == '('){
+        if(teste[i] == ')') {
+            d.txt = ")";
+            push(&p, d);
+        } else if(teste[i] == '(') {
             d.txt = "(";
             push(&p, d);
-        } else if(teste[i] == ')') {
-            control++;
         }
     }
-    printf("Quantidade de ')': %d\n", control);
-    printf("Verificando...\n");
-    
+
+    printTxtP(&p);
+
     temp = p.top;
     while(temp != p.base) {
-        if(temp != NULL) {
+        if(temp->data.txt == ")") 
+            control++;
+
+        else if(temp->data.txt == "(") 
             control--;
-            d = temp->data;
-            printf("----\n %s  -> saindo\n----\n", d.txt);
-            pop(&p, d);
-            temp = temp->next;
+
+        pop(&p, &d);
+
+        if (control < 0) {
+            break;
         }
+        temp = temp->next;
     }
 
     if (control == 0) printf("PARENTIZACAO CORRETA!\n");
     else printf("PARENTIZACAO ERRADA!\n");
+
+    emptyP(&p);
 }
 
 void p2B() {
-
+    
 }
 
 void p2C() {
+    Pilha p;
+    ItemP2 d;
+
+    initP(&p);
+
+    for (int i = 0; i < P2C; i++) {
+        d.val = numGen(99);
+        d.val == 0 ? d.val = 1 : d.val;
+        printf("%d - ", d.val);
+        push(&p, d);
+    }
+    printf("\n\n");
+
+    printValP(&p);
+
+    emptyP(&p);
 
 }

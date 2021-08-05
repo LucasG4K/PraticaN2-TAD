@@ -1,4 +1,4 @@
-#include "P1.h"
+#include "P1&Lista.h"
 #include <time.h>
 #include <string.h>
 
@@ -49,60 +49,6 @@ int numGen(int interval) {
     return rand() % interval;
 }
 
-//inicializa lista apontado para null
-void initL(Lista* l) {
-    l->first = (BlockP1*)malloc(sizeof(BlockP1));
-    l->last = l->first;
-    l->first->next = NULL;
-}
-
-//inserir item especifico na lista
-void insertL(Lista* l, ItemP1 d) {
-    l->last->next = (BlockP1*)malloc(sizeof(BlockP1));
-    l->last = l->last->next;
-    l->last->data = d;
-    l->last->next = NULL;
-}
-
-//esvaziar a lista inteira -> rever
-void emptyL(Lista* l) {
-    BlockP1 *value, *temp;
-    value = l->first->next;
-
-    while (temp != NULL) {
-        temp = value;
-        value = temp->next;
-        free(temp);
-    }
-    l->first->next = NULL;
-    l->last = NULL;
-}
-
-//imprimir numeros da lista
-void printValL(Lista* l) {
-    BlockP1* temp;
-    temp = l->first->next;
-
-    while (temp != NULL) {
-        printf("%3d   ", temp->data.val);
-        temp = temp->next;
-    }
-    printf("\n");
-}
-
-//imprimir caracteres da lista
-void printStrL(Lista* l) {
-    BlockP1* temp;
-    temp = l->first->next;
-
-    while (temp != NULL) {
-        printf("%s ", temp->data.str);
-        temp = temp->next;
-    }
-    printf("\n");
-
-}
-
 //problema 1A (permutacao de 2 listas)
 void p1A() {
     Lista L1, L2, L3;
@@ -143,15 +89,15 @@ void p1A() {
     }
 
     printf("---------------\nLista 1\n");
-    printValL(&L1);
+    printL(&L1);
     printf("---------------\nLista 2\n");
-    printValL(&L2);
+    printL(&L2);
     printf("---------------\nLista 3\n");
-    printValL(&L3);
+    printL(&L3);
 
-    // emptyL(&L1);
-    // emptyL(&L2);
-    // emptyL(&L3);
+    emptyL(&L1);
+    emptyL(&L2);
+    emptyL(&L3);
 }
 
 //problema 1B (jogo)
@@ -228,35 +174,52 @@ void p1B() {
     else printf("\n|Soma 3 (valor: %d) vencedor!!!|\n", temp1->next->next->data.val);
     printf("---------------------------------\n");
 
-    // emptyL(&L1);
-    // emptyL(&L2);
-    // emptyL(&L3);
+    emptyL(&L1);
+    emptyL(&L2);
+    emptyL(&L3);
 }
 
 //problema 1C (mercado) -> rever
 void p1C() {
-    Lista L1, L2, L3;
-    ItemP1 d;
+    ListaC L1, L2, L3;
+    ItemP1C d1, d2, d3;
 
-    //contadores
-    int i = 0, j = 0, k = 0;
-    char nome[25];
+    initLc(&L1);
+    initLc(&L2);
+    initLc(&L3);
 
-    printf("nome: ");
-    fflush(stdin);
-    gets(nome);
+    d1.produto = "Arroz 5kg";
+    d1.val = 30.80;
+    d1.id = 1;
+    insertLc(&L1, d1);
 
-    initL(&L1);
-    initL(&L2);
-    initL(&L3);
+    d1.produto = "Feijao 1kg";
+    d1.val = 10.20;
+    d1.id = 2;
+    insertLc(&L1, d1);
 
-    d.str = nome;
+    d1.produto = "Milho Verde 200g";
+    d1.val = 4.00;
+    d1.id = 3;
+    insertLc(&L1, d1);
 
-    insertL(&L1, d);
-    printStrL(&L1);
+    d2.mercado = "Mercado 1";
+    d2.id = 1;
+    insertLc(&L2, d2);
 
-    // emptyL(&L1);
-    // emptyL(&L2);
-    // emptyL(&L3);
+    d2.mercado = "Mercado 2";
+    d2.id = 2;
+    insertLc(&L2, d2);
+
+    d2.mercado = "Mercado 3";
+    d2.id = 3;
+    insertLc(&L2, d2);
+
+    printProdutoAllc(&L1);
+    printMercadoAllLc(&L2);
+
+    emptyLc(&L1);
+    emptyLc(&L2);
+    emptyLc(&L3);
 
 }

@@ -1,6 +1,6 @@
-#include "P1.h"
-#include "P2.h"
-#include "P3.h"
+#include "P1&Lista.h"
+#include "P2&Pilha.h"
+#include "P3&Fila.h"
 
 int main() {
     system("CLS");

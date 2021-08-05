@@ -6,7 +6,7 @@
 #include <string.h>
 
 #define P2B 3
-#define P2C 6
+#define P2C 20
 
 typedef struct ItemP2 ItemP2;
 typedef struct BlockP2 BlockP2;
@@ -19,6 +19,7 @@ struct ItemP2 {
 
 struct BlockP2 {
     ItemP2 data;
+    ItemP2 aux;
     BlockP2 *next;
 };
 
@@ -29,7 +30,7 @@ struct Pilha {
 
 void initP(Pilha *p);
 void push(Pilha *p, ItemP2 d);
-void pop(Pilha *p, ItemP2 d);
+void pop(Pilha *p, ItemP2 *d);
 void emptyP(Pilha *p);
 void printValP(Pilha *p);
 void printTxtP(Pilha *p);

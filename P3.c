@@ -1,4 +1,4 @@
-#include "P3.h"
+#include "P3&Fila.h"
 
 //submenu 3
 int menuP3() {
@@ -36,63 +36,6 @@ int menuP3() {
     } while (1);
 }
 
-//inicializa fila apontado para null
-void initF(Fila *f) {
-    f->first = (BlockP3 *) malloc (sizeof(BlockP3));
-    f->last = f->first;
-    f->first->next = NULL;
-}
-
-//inserir item especifico na fila
-void enfileira(Fila *f, ItemP3 d) {
-    f->last->next = (BlockP3 *) malloc (sizeof(BlockP3));
-    f->last = f->last->next;
-    f->last->data = d;
-    f->last->next = NULL;
-}
-
-//remover item especifico da fila
-void desenfileira(Fila *f, ItemP3 d) {
-    BlockP3 *temp;
-
-    if(f->first == f->last || f->first->next == NULL || f == NULL) {
-        printf("Fila vazia!\n");
-        return;
-    }
-
-    temp = f->first;
-    f->first = f->first->next;
-    f->first->data = d;
-    free(temp);
-}
-
-//esvaziar a fila inteira -> rever
-// void emptyF(Fila *f);
-
-//imprimir numeros da fila
-void printValF(Fila *f) {
-    BlockP3 *temp;
-
-    temp = f->first->next;
-    while(temp != NULL) {
-        printf("%d  ", temp->data.val);
-        temp = temp->next;
-    }
-    printf("\n");
-}
-
-//imprimir char da fila
-void printTxtF(Fila *f) {
-    BlockP3 *temp;
-
-    temp = f->first->next;
-    while(temp != NULL) {
-        printf("%s", temp->data.txt);
-        temp = temp->next;
-    }
-    printf("\n");
-}
-
 void p3A() {
     Fila f;
     ItemP3 d;
@@ -104,6 +47,14 @@ void p3A() {
     enfileira(&f, d);
     enfileira(&f, d);
     enfileira(&f, d);
+
+    printValF(&f);
+    printTxtF(&f);
+
+    d = f.first->next->data;
+    desenfileira(&f, d);
+
+    printf("apos desenfileirar: \n");
 
     printValF(&f);
     printTxtF(&f);
