@@ -19,7 +19,7 @@ struct BlockP3 {
 };
 
 struct Fila {
-    BlockP3 *last;
+    BlockP3 *first;
     BlockP3 *last;
 };
 
@@ -33,6 +33,5 @@ void printTxtF(Fila *f);
 int menuP3();
 void p3A();
 void p3B();
-void p3C();
 
 #endif

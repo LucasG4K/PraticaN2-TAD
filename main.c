@@ -1,5 +1,6 @@
 #include "P1.h"
 #include "P2.h"
+#include "P3.h"
 
 int main() {
     system("CLS");
@@ -27,7 +28,7 @@ int main() {
             break;
         
         case 3:
-            //menuP3();
+            menuP3();
             break;
         
         case 4:

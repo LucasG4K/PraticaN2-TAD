@@ -149,12 +149,12 @@ void p1A() {
     printf("---------------\nLista 3\n");
     printValL(&L3);
 
-    emptyL(&L1);
-    emptyL(&L2);
-    emptyL(&L3);
+    // emptyL(&L1);
+    // emptyL(&L2);
+    // emptyL(&L3);
 }
 
-//problema 1B (jogo) -> rever comparacoes
+//problema 1B (jogo)
 void p1B() {
     Lista L1, L2, L3;
     BlockP1* temp1, * temp2, * temp3;
@@ -228,9 +228,9 @@ void p1B() {
     else printf("\n|Soma 3 (valor: %d) vencedor!!!|\n", temp1->next->next->data.val);
     printf("---------------------------------\n");
 
-    emptyL(&L1);
-    emptyL(&L2);
-    emptyL(&L3);
+    // emptyL(&L1);
+    // emptyL(&L2);
+    // emptyL(&L3);
 }
 
 //problema 1C (mercado) -> rever

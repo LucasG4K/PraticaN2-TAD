@@ -5,8 +5,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define P2B   3
-#define P2C   6
+#define P2B 3
+#define P2C 6
 
 typedef struct ItemP2 ItemP2;
 typedef struct BlockP2 BlockP2;

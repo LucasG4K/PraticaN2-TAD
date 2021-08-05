@@ -115,7 +115,7 @@ void printTxtP(Pilha *p) {
 //     return rand() % interval;
 // }
 
- void p2A() {
+void p2A() {
     Pilha p;
     ItemP2 d;
     int control = 0;
@@ -157,5 +157,9 @@ void printTxtP(Pilha *p) {
 }
 
 void p2B() {
-    
+
+}
+
+void p2C() {
+
 }
