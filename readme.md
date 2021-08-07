@@ -1,7 +1,7 @@
-<center> Prática Nº2 <center>
-=
-<center> Tipo abstrato de dados (TAD): Listas, Pilhas e Filas <center>
--
+# <div align="center"> Prática Nº2</div>
+
+## <div align="center">Tipo abstrato de dados (TAD): Listas, Pilhas e Filas</div>
+
 
 No trabalho proposto em aula, o objetivo era que nós, alunos, pudéssemos praticar as implementações de tipos abstratos de dado vistos previamente. Desse modo, o exercício para tal prática foi dividido nas seguintes etapas:
 
@@ -27,10 +27,9 @@ As declarações das funções de lista foram feitas por meio de uma estrutura p
 ---
 ### Problema 2 - Pilhas
 
-
-
 As declarações das funções de pilha foram feitas por meio de uma estrutura principal que abrange o problema em toda sua extensão. Essa estrutura pode ser observada em "P2&Pilha.h". Além disso, a implementação relacionada a essas funções pode ser localizada em Pilha.c.
 
+Descrição sucinta e resumida sobre a pilha
 ![](https://www.cos.ufrj.br/~rfarias/cos121/operacoesPilha2.png)
 
 #### A) Parênteses
