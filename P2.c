@@ -21,7 +21,7 @@ int menuP2() {
             break;
 
         case ('B'): case ('b'):
-            //p2B();
+            p2B();
             break;
 
         case ('C'): case ('c'):
@@ -41,6 +41,7 @@ int menuP2() {
     } while (1);
 }
 
+//parentizacao
 void p2A() {
     Pilha p;
     ItemP2 d;
@@ -67,6 +68,7 @@ void p2A() {
 
     printTxtP(&p);
 
+    //para essa verificacao, a referencia para controle e' o parentese ')' pois ele e' responsavel por incrementar a variavel controle; alem disso sempre que a parentizacao estiver correta, esse caractere aparecera no topo e o '(' estara na base. Porem as regras nao se limitam a isso...
     temp = p.top;
     while(temp != p.base) {
         if(temp->data.txt == ")") 
@@ -80,6 +82,7 @@ void p2A() {
         if (control < 0) {
             break;
         }
+
         temp = temp->next;
     }
 
@@ -89,26 +92,86 @@ void p2A() {
     emptyP(&p);
 }
 
+//transferencia entre pilhas
 void p2B() {
-    
-}
-
-void p2C() {
-    Pilha p;
+    Pilha P1, P2;
+    BlockP2 *temp;
     ItemP2 d;
 
-    initP(&p);
+    initP(&P1);
+    initP(&P2);
+
+    for (int i = 0; i < P2B; i++) {
+        d.val = i + 1;
+        push(&P1, d);
+    }
+    printValP(&P1);
+
+    temp = P1.top;
+    while (temp != P1.base) {
+
+
+        d.val = temp->data.val;
+        pop(&P1, &d);
+        push(&P1, d);
+        
+
+
+        temp->aux = temp->data;
+        temp->data = temp->next->data;
+        temp->next->data = temp->aux;
+
+        
+
+        temp = temp->next;
+    }
+
+    printf("Fazendo a transferencia...\n");
+    printValP(&P1);
+    printf("  |\n");
+    printf("  V\n");
+    printValP(&P1);
+
+}
+
+//utilizado para o problema C
+int mdc(int aux, int d) {
+    if(aux % d == 0)
+        return d;
+    else
+        return mdc(d, aux % d);
+}
+
+//co-primos
+void p2C() {
+    Pilha P1, v;
+    ItemP2 d, d2;
+    BlockP2 *temp;
+    int aux;
+
+    initP(&P1);
 
     for (int i = 0; i < P2C; i++) {
+        initP(&v);
         d.val = numGen(99);
         d.val == 0 ? d.val = 1 : d.val;
-        printf("%d - ", d.val);
-        push(&p, d);
+        push(&P1, d);
+
+        printf("|%2.d| ->", d.val);
+        
+        aux = d.val;
+        int j = 0;
+
+        for (int j = 0; j < aux; j++) {
+            d.val = aux - j;
+
+            if(mdc(aux, d.val) == 1)
+                push(&v, d);
+        }
+
+        printValHorizontalP(&v);
+        emptyP(&v);
     }
-    printf("\n\n");
 
-    printValP(&p);
-
-    emptyP(&p);
-
+    emptyP(&P1);
 }

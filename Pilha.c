@@ -51,10 +51,22 @@ void printValP(Pilha *p) {
 
     temp = p->top;
     while(temp != p->base) {
-        printf("|%d|\n", temp->data.val);
+        printf("|%2.d|\n", temp->data.val);
         temp = temp->next;
     }
     printf("----\n");
+}
+
+//imprimir numeros da pilha horizontalmente
+void printValHorizontalP(Pilha *p) {
+    BlockP2 *temp;
+
+    temp = p->top;
+    while(temp != p->base) {
+        printf("%2.d ", temp->data.val);
+        temp = temp->next;
+    }
+    printf("\n");
 }
 
 //imprimir char da pilha
