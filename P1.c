@@ -78,14 +78,13 @@ void p1A() {
     //preenchimento L3
     aux1 = L1.first->next;
     aux2 = L2.first->next;
-    while (i > 0) {
+    while (aux2 != NULL) {
         d = aux1->data;
         insertL(&L3, d);
         d = aux2->data;
         insertL(&L3, d);
         aux1 = aux1->next;
         aux2 = aux2->next;
-        i--;
     }
 
     printf("---------------\nLista 1\n");
@@ -162,7 +161,7 @@ void p1B() {
         temp1 = temp2->next;
     }
 
-    //comparacoes => rever caso de empate
+    //comparacoes
     temp1 = L3.first->next;
     printf("---------------------------------");
     if (temp1->data.val > temp1->next->data.val && temp1->data.val > temp1->next->next->data.val)
@@ -170,6 +169,27 @@ void p1B() {
 
     else if (temp1->next->data.val > temp1->data.val && temp1->next->data.val > temp1->next->next->data.val)
         printf("\n|Soma 2 (valor: %d) vencedor!!!|\n", temp1->next->data.val);
+
+    else if (temp1->next->data.val == temp1->data.val && temp1->next->data.val == temp1->next->next->data.val)
+        printf("\n|           EMPATE!!!          |\n");
+
+    else if (temp1->next->data.val == temp1->data.val && temp1->next->data.val > temp1->next->next->data.val)
+        printf("\n|           EMPATE!!!          |\n");
+
+    else if (temp1->next->data.val > temp1->data.val && temp1->next->data.val == temp1->next->next->data.val)
+        printf("\n|           EMPATE!!!          |\n");
+
+    else if (temp1->next->data.val < temp1->data.val && temp1->data.val == temp1->next->next->data.val)
+        printf("\n|           EMPATE!!!          |\n");
+
+    else if (temp1->next->data.val == temp1->data.val && temp1->data.val > temp1->next->next->data.val)
+        printf("\n|           EMPATE!!!          |\n");
+
+    else if (temp1->next->next->data.val == temp1->data.val && temp1->next->data.val < temp1->next->next->data.val)
+        printf("\n|           EMPATE!!!          |\n");
+
+    else if (temp1->next->next->data.val > temp1->data.val && temp1->next->data.val == temp1->next->next->data.val)
+        printf("\n|           EMPATE!!!          |\n");
 
     else printf("\n|Soma 3 (valor: %d) vencedor!!!|\n", temp1->next->next->data.val);
     printf("---------------------------------\n");
@@ -179,7 +199,7 @@ void p1B() {
     emptyL(&L3);
 }
 
-//problema 1C (mercado) -> rever
+//problema 1C (mercado) -> incompleta
 void p1C() {
     ListaC L1, L2, L3;
     ItemP1C d1, d2, d3;
