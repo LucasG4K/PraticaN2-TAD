@@ -10,7 +10,7 @@ int menuP1() {
         printf("Problema 1 - Listas:\n");
         printf("A - Concatenar L1 e L2\n");
         printf("B - Jogo\n");
-        printf("C - Mercado\n");
+        printf("C - Mercado (incompleta)\n");
         printf("X - Voltar\n");
         printf("Opcao: ");
         scanf(" %c", &option);
@@ -241,5 +241,4 @@ void p1C() {
     emptyLc(&L1);
     emptyLc(&L2);
     emptyLc(&L3);
-
 }

@@ -172,6 +172,3 @@ void printAllLc(ListaC *l) {
     printf("\n");
 }
 
-
-
-

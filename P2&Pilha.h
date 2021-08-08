@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define P2B  5
+#define P2B  12
 #define P2C 20
 
 typedef struct ItemP2 ItemP2;
@@ -19,7 +19,6 @@ struct ItemP2 {
 
 struct BlockP2 {
     ItemP2 data;
-    ItemP2 aux;
     BlockP2 *next;
 };
 
@@ -33,8 +32,8 @@ void push(Pilha *p, ItemP2 d);
 void pop(Pilha *p, ItemP2 *d);
 void emptyP(Pilha *p);
 void printValP(Pilha *p);
-void printValHorizontalP(Pilha *p);
 void printTxtP(Pilha *p);
+void printValHorizontalP(Pilha *p);
 
 int numGen(int interval);
 

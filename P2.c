@@ -66,8 +66,6 @@ void p2A() {
         }
     }
 
-    printTxtP(&p);
-
     //para essa verificacao, a referencia para controle e' o parentese ')' pois ele e' responsavel por incrementar a variavel controle; alem disso sempre que a parentizacao estiver correta, esse caractere aparecera no topo e o '(' estara na base. Porem as regras nao se limitam a isso...
     temp = p.top;
     while(temp != p.base) {
@@ -101,36 +99,37 @@ void p2B() {
     initP(&P1);
     initP(&P2);
 
-    for (int i = 0; i < P2B; i++) {
-        d.val = i + 1;
+    int cont = 0;
+    int i = 0;
+
+    while (cont < P2B) {
+        d.val = cont + 1;
         push(&P1, d);
-    }
-    printValP(&P1);
-
-    temp = P1.top;
-    while (temp != P1.base) {
-
-
-        d.val = temp->data.val;
-        pop(&P1, &d);
-        push(&P1, d);
-        
-
-
-        temp->aux = temp->data;
-        temp->data = temp->next->data;
-        temp->next->data = temp->aux;
-
-        
-
-        temp = temp->next;
+        cont++;
     }
 
-    printf("Fazendo a transferencia...\n");
+    temp = P1.top;  
+    while (cont > 0) {
+        if (i == cont) {
+            d = temp->data;
+            push(&P2, d);
+            temp = P1.top;
+            cont--;
+            i = 0;
+        }
+        i++;
+        if (i != cont) temp = temp->next;
+    }
+
+    printf("P1: \n");
     printValP(&P1);
-    printf("  |\n");
+    printf("  |   Fazendo a transferencia...\n");
     printf("  V\n");
-    printValP(&P1);
+    printf("P2: \n");
+    printValP(&P2);
+
+    emptyP(&P1);
+    emptyP(&P2);
 
 }
 
@@ -148,10 +147,12 @@ void p2C() {
     ItemP2 d, d2;
     BlockP2 *temp;
     int aux;
+    int cont = 0;
 
     initP(&P1);
 
     for (int i = 0; i < P2C; i++) {
+        cont = 0;
         initP(&v);
         d.val = numGen(99);
         d.val == 0 ? d.val = 1 : d.val;
@@ -165,11 +166,15 @@ void p2C() {
         for (int j = 0; j < aux; j++) {
             d.val = aux - j;
 
-            if(mdc(aux, d.val) == 1)
+            if(mdc(aux, d.val) == 1) {
                 push(&v, d);
+                cont++;
+            }
         }
 
+        
         printValHorizontalP(&v);
+        printf("Phi = %d\n\n", cont);
         emptyP(&v);
     }
 

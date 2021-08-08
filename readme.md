@@ -25,6 +25,7 @@ Para essa tarefa, utilizei uma contrução de listas em seu formato dinâmico e,
 As declarações das funções de lista foram feitas por meio de uma estrutura principal que abrange o problema em toda sua extensão. Essa estrutura pode ser observada em "P1&Lista.h". Além disso, a implementação relacionada a essas funções pode ser localizada em Lista.c.
 
 #### A) Concatenação entre Listas
+###### Arquivo: P1.c - Função: void p1A();
 Através da criação de duas listas que recebem valores aleatórios pares e ímpares separadamente e de uma terceira, utilizada como auxiliar, a concatenação entre duas listas pôde ser feita através de um loop em que eram adicionados sempre dois itens (1 item de L1 e 1 de L2, nesta ordem) a esta auxiliar, até que se chegasse ao último valor da segunda lista.
 
 ###### Obs: Aux 1 aponta para o primeiro item da lista 1 e aux 2 aponta para o primeiro da lista 2. Devido a adição de L2 por último, o loop o tem como condição de parada. A cada passagem pela função os ponteiros são redirecionados para a próxima posição com o valor armazenado de L1 e L2. São feitas duas inserções a lista 3 (auxiliar) de forma que fosse matida a ordem de L1 e L2 em L3; 
@@ -34,16 +35,17 @@ Através da criação de duas listas que recebem valores aleatórios pares e ím
     aux1 = L1.first->next;
     aux2 = L2.first->next;
     while (aux2 != NULL) {
-        d = aux1->data;
+        d = aux1->data; //valor de L1 a ser acrescentado em L3
         insertL(&L3, d);
-        d = aux2->data;
+        d = aux2->data; //valor de L2 a ser acrescentado em L3
         insertL(&L3, d);
         aux1 = aux1->next;
         aux2 = aux2->next;
     }
 
 #### B) Jogo
-
+###### Arquivo: P1.c - Função: void p1B();
+Partindo do preenchimento de L1 (lista 1) e L2 (lista 2) com 3 valores para cada e seguindo pelo sorteio de um número inicial para comparação dos valores, utilizei um método para somar os valores em posições iguais de L1 e L2, armazenando em uma terceira lista, que vem a ser um auxiliar, o total somado. Com os 3 valores em L3, basta que seja feito um comparativo e assim, exiba o vencedor da partida.
 
 ###### Obs: Aux 1 aponta para o primeiro item da lista 1 e aux 2 aponta para o primeiro da lista 2. Devido a adição de L2 por último, o loop o tem como condição de parada. A cada passagem pela função os ponteiros são redirecionados para a próxima posição com o valor armazenado de L1 e L2. São feitas duas inserções a lista 3 (auxiliar) de forma que fosse matida a ordem de L1 e L2 em L3; 
 
@@ -52,7 +54,7 @@ Através da criação de duas listas que recebem valores aleatórios pares e ím
 
 
 #### C) Mercado
-Não obtive sucesso na realização desse tópico;
+Tópico não solucionado.
 
 ---
 ### Problema 2 - Pilhas
