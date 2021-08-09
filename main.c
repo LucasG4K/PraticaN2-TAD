@@ -13,7 +13,7 @@ int main() {
         printf("1 - Problema 1 - Lista\n");
         printf("2 - Problema 2 - Pilha\n");
         printf("3 - Problema 3 - Fila\n");
-        printf("4 - Problema 4\n");
+        printf("4 - Problema 4 (nao feita)\n");
         printf("0 - SAIR\n");
         printf("Opcao: ");
         scanf("%d", &option);

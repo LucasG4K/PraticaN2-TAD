@@ -184,6 +184,7 @@ As declarações das funções de fila foram feitas por meio de uma estrutura pr
 
 #### B) Classe de maior valor
 ###### Arquivo: P3.c - Função: void p3A();
+Para encontrar a classe de maior valor dentro de uma determinada posição na fila, podem ser implementadas algumas estruturas para a struct Item que servirá para armazenar as posições do vetor, o maior valor desses dados e a posição em que se encontra. Desse modo, o preenchimento da fila foi feito e juntamente com o preenchimento das 5 posições do vetor dentro da fila. Uma vez feito o enfileiramento e preenchimento dos valores ao vetor, basta que os valores do vetor sejam comparados entre si para encontrar o maior elemento e também é possível que se armazene a posição com uma variável auxiliar, bem como outra variável para guardar a soma dos 5 itens. Por fim, a fila pode ser percorrida para encontrar a maior soma obtida de cada classe e assim obter a classe de maior valor dentro da fila.
 
 ---
 ### Problema 4
