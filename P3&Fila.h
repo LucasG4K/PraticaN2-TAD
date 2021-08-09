@@ -10,6 +10,10 @@ typedef struct Fila Fila;
 
 struct ItemP3 {
     int val;
+    int subVal[5];
+    int maior;
+    int soma;
+    int pos;
     char *txt;
 };
 
@@ -28,7 +32,10 @@ void enfileira(Fila *f, ItemP3 d);
 void desenfileira(Fila *f, ItemP3 d);
 void emptyF(Fila *f);
 void printValF(Fila *f);
+void printValFc(Fila *f);
 void printTxtF(Fila *f);
+
+int numGen(int interval);
 
 int menuP3();
 void p3A();

@@ -54,6 +54,7 @@ Partindo do preenchimento de L1 (lista 1) e L2 (lista 2) com 3 valores para cada
 
 
 #### C) Mercado
+###### Arquivo: P1.c - Função: void p1C();
 Tópico não solucionado.
 
 ---
@@ -68,10 +69,103 @@ Para essa tarefa, utilizei uma contrução de pilhas em seu formato dinâmico se
 As declarações das funções de pilha foram feitas por meio de uma estrutura principal que abrange o problema em toda sua extensão. Essa estrutura pode ser observada em "P2&Pilha.h". Além disso, a implementação relacionada a essas funções pode ser localizada em Pilha.c.
 
 #### A) Parênteses
+###### Arquivo: P2.c - Função: void p2A();
+A investigação da parentização de frases utilizando pilha pode ser feita por meio empilhamento de todos os parênteses contidos na expressão e aA partir daí a verificação pode ser feita tendo base no parêntese de fechamento das declarações. Para que uma expressão esteja correta, é necessário que exista um balanceamento entre '(' e ')' que foi garantida por um controle (int control) que era acrescido ao encontrar parênteses fechados e descrescido em casos análogos. Esse controle, sempre deveria manter valores maiores que 0 para que a execução continuasse. Caso o controle assuma um valor inferior a 0, a parentização está errada e por isso a aplicação imediatamente se fecha dando uma mensagem de sobre sua incoerência. Além disso, caso não tivéssemos a ciscustância anterior, outro possível motivo para a parentização incorreta é que se ao final da execução o valor de controle for diferente de 0 indica que a expressão está desbalanceada em relação a abertura e fechamento desses sinais. Para resultados de controle distintos a esses dois apresentados, a expressão deve aparecer como correta.
+
+###### *Observar os trechos de código abaixo.
+
+###### Insere '(' e ')' à pilha.
+
+    for (int i = 0; i < strlen(teste); i++) {
+        if(teste[i] == ')') {
+            d.txt = ")";
+            push(&p, d);
+        } else if(teste[i] == '(') {
+            d.txt = "(";
+            push(&p, d);
+        }
+    }
+
+###### Verifica o balanceamento entre '(' e ')' na pilha.
+
+    //para essa verificacao, a referencia para controle e' o parentese ')' pois ele e' responsavel por incrementar a variavel controle; alem disso sempre que a parentizacao estiver correta, esse caractere aparecera' no topo e o '(' estara' na base. Porem as regras nao se limitam a isso...
+    
+    temp = p.top;
+    while(temp != p.base) {
+        if(temp->data.txt == ")") 
+            control++;
+
+        else if(temp->data.txt == "(") 
+            control--;
+
+        pop(&p, &d);
+
+        if (control < 0) {
+            break;
+        }
+
+        temp = temp->next;
+    }
+
+    if (control == 0) printf("PARENTIZACAO CORRETA!\n");
+    else printf("PARENTIZACAO ERRADA!\n");
 
 #### B) Tranferência entre Pilhas
 
+###### Arquivo: P2.c - Função: void p2B();
+
+Sobre a tranferência de valores de uma pilha para outra, mantendo a mesma posição de ocupação e sem utilizar uma pilha auxiliar, a ideia implementada funciona da seguinte forma:
+
+* Inicialização e preenchimento de P1 (pilha 1);
+* Inicialização de P2 (pilha 2);
+
+Após fazer o empilhamento em P1 e tendo o tamanho dessa pilha, é necessário que se faça um loop que se inicia do topo e segue em direção a base. Esse loop verifica cada posição de nossa pilha e portanto se faz capaz de obter os valores de P1 e assim transferi-los para P2. 
+
+###### Abaixo, pode ser observada a implementação dessa ideia.
+
+    temp = P1.top;  
+    while (cont > 0) { // cont => quantidade de valores em P1 (verificação começa de baixo para cima)
+        if (i == cont) { // caso i atinja a posição verificada de P1, faz-se o empilhamneto desse valor em P2
+            d = temp->data;
+            push(&P2, d);
+            temp = P1.top;
+            cont--; // avança a verificação para um valor acima na pilha
+            i = 0;
+        }
+        i++;
+        if (i != cont) temp = temp->next;
+    }
+
 #### C) Co-Primos
+
+###### Arquivo: P2.c - Função: int mdc(int aux, int d) e void p2C();
+
+Em se tratando da função totiente de Euler, que se almeja encontrar o phi (Φ) de um número, esse problema pode ser resolvido utilizando o M.D.C do número para descobrir primos entre si. A quantidade de números primos entre si, ou apenas co-primos, indica para nós o valor Φ desse número. Essa verificação deve ser feita partindo do número desejado e comparado até que chegue ao menor número positivo da sequência, 1. Para os casos em que o MDC é igual a 1, o número é co-primo e portanto é um valor a ser acrescentado a phi. Dessa maneira, utilizei uma pilha para armazenar os valores a serem verificados e com "subpilhas" armazenei os co-primos encontrado pela função mdc. Durante o empilhamento dos primos entre si estipulei um contador que me forcesse o valor phi ao final de sua execução e era zerado na próxima vez que um valor da pilha principal fosse gerado.
+
+###### *Observar os trechos de código abaixo.
+
+    initP(&P1);
+    for (int i = 0; i < P2C; i++) {
+        cont = 0;
+        initP(&v);
+        d.val = numGen(99);
+        d.val == 0 ? d.val = 1 : d.val;
+        push(&P1, d);
+
+        printf("|%2.d| ->", d.val);
+        
+        aux = d.val;
+        int j = 0;
+
+        for (int j = 0; j < aux; j++) {
+            d.val = aux - j;
+
+            if(mdc(aux, d.val) == 1) {
+                push(&v, d);
+                cont++;
+            }
+        }
+
 
 ---
 ### Problema 3 - Filas
@@ -86,9 +180,12 @@ As declarações das funções de fila foram feitas por meio de uma estrutura pr
 
 
 #### A) Binômio de Newton
+###### Não foi feita.
 
 #### B) Classe de maior valor
+###### Arquivo: P3.c - Função: void p3A();
 
 ---
 ### Problema 4
 
+###### Não foi feita.

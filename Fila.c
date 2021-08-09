@@ -56,6 +56,25 @@ void printValF(Fila *f) {
     printf("\n");
 }
 
+//imprimir questao C
+void printValFc(Fila *f) {
+    BlockP3 *temp;
+
+    temp = f->first->next;
+    while(temp != NULL) {
+        printf("%2d: ", temp->data.val);
+
+        for (int i = 0; i < 5; i++) {
+            printf("%d  ", temp->data.subVal[i]);
+        }
+        printf("Maior valor da classe: %d na posicao %d; Total = %d", temp->data.maior, temp->data.pos, temp->data.soma);
+        printf("\n");
+
+        temp = temp->next;
+    }
+    printf("\n");
+}
+
 //imprimir char da fila
 void printTxtF(Fila *f) {
     BlockP3 *temp;

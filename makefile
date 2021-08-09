@@ -1,5 +1,5 @@
-output: main.o P1.o P2.o P3.o P4.o Lista.o Pilha.o Fila.o
-	gcc main.o P1.o P2.o P3.o P4.o Lista.o Pilha.o Fila.o -o run
+output: main.o P1.o P2.o P3.o Lista.o Pilha.o Fila.o
+	gcc main.o P1.o P2.o P3.o Lista.o Pilha.o Fila.o -o run
 
 main.o: main.c
 	gcc -c main.c
@@ -21,9 +21,6 @@ P3.o: P3.c P3&Fila.h
 
 Fila.o: Fila.c P3&Fila.h
 	gcc -c Fila.c
-
-P4.o: P4.c P4.h
-	gcc -c P4.c
 
 run:
 	run.exe
